@@ -1,6 +1,7 @@
 //jshint esversion:6
 
-//ideas - add hints, removes two of the answers - perfect game message
+//ideas - add hints, removes two of the answers, add sound effects
+
 
 const quotes = [
         ["Good news everyone!", "Hubert J. Farnsworth", 1],
@@ -64,7 +65,6 @@ const quotes = [
 
 let shuffledQuotes = shuffle(quotes);
 
-
 const names = [
         "Hubert J. Farnsworth",
         "Bender B. Rodriguez",
@@ -79,19 +79,12 @@ const names = [
         "Morbo"
       ];
 
-
 function loadQuestionAndAnswers() {
-  if (shuffledQuotes.length === 0) {
-    //you won!!
-    //break or return something
-  }
-
   //remove quote from randomized quotes - set variables for properties
   currQuestion = shuffledQuotes.shift();
   currQuote = currQuestion[0];
   currAnswer = currQuestion[1];
   currQuestionScore = currQuestion[2];
-
 
   document.getElementById("question").innerHTML = currQuote;
 
@@ -118,21 +111,13 @@ function loadQuestionAndAnswers() {
 
 
 const gameStates = document.getElementById("gameStates");
-
 let questionNum = 1;
-
 let score = 0;
-
 let tries = 3;
-
 let currQuestion;
-
 let currQuote;
-
 let currAnswer;
-
 let currQuestionScore;
-
 
 //add click event listener with switch statements look for appropriate answers
 //check if answers are correct
@@ -158,7 +143,6 @@ for (let i = 0; i < answerDivs.length; i++) {
   });
 }
 
-
 function correctAnswer() {
   score += currQuestionScore;
   questionNum += 1;
@@ -175,11 +159,10 @@ function updateGameStates() {
   gameStates.innerHTML = "Tries: " + tries + " Question: " + questionNum + "   Score: " + score;
 }
 
-
 function displayMessage(corrAnswer) {
   //input: correctAnswer = bool, optional true = won, false = lost, absent = other
   let corrMessage = "Huzzahs are in order!<br>+ " + currQuestionScore + "<br>Click for the next question";
-  let incMessage = "Oooh, so close...<br>-1 Try" + "<br>Click for the next question";
+  let incMessage = "Oooh, so close...<br>-1" + "<br>Click for the next question";
   let endOfGameWin = "Oh snap, you made it through all the questions!<br>Final Score: " + score + " Click here to play again!";
   let endOfGameLoss = "Game Over Meatbag<br>Final Score: " + score + "<br>Click to play again!";
 
@@ -201,10 +184,8 @@ function displayMessage(corrAnswer) {
     }
   }
 
-  //let parent = document.getElementById("container");
   let reference = document.getElementById("titleBox");
-  reference.parentNode.insertBefore(newP, reference.nextSibling);
-  //container.appendChild(newP);
+  reference.parentNode.insertBefore(newP, reference.nextSibling); 
 
   newP.addEventListener("click", function() {
     newP.remove();
@@ -228,7 +209,6 @@ function resetGame() {
   updateGameStates();
 }
 
-
 function hideQandA() {
   let q = document.getElementById("question");
   q.classList.add("hide");
@@ -245,7 +225,6 @@ function hideQandA() {
     a.innerHTML = "";
   }
 }
-
 
 function revealQandA() {
   let q = document.getElementById("question");
