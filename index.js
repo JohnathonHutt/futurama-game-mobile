@@ -86,13 +86,14 @@ function loadQuestionAndAnswers() {
     //break or return something
   }
 
+  //remove quote from randomized quotes - set variables for properties
   currQuestion = shuffledQuotes.shift();
   currQuote = currQuestion[0];
   currAnswer = currQuestion[1];
   currQuestionScore = currQuestion[2];
 
 
-  document.getElementById("question").innerHTML = '"' + currQuote + '"';
+  document.getElementById("question").innerHTML = currQuote;
 
   currAnswerChoices = Array(4);
   currAnswerChoices[Math.floor(Math.random() * 4)] = currAnswer;
@@ -179,7 +180,7 @@ function displayMessage(corrAnswer) {
   //input: correctAnswer = bool, optional true = won, false = lost, absent = other
   let corrMessage = "Huzzahs are in order!<br>+ " + currQuestionScore + "<br>Click for the next question";
   let incMessage = "Oooh, so close...<br>-1 Try" + "<br>Click for the next question";
-  let endOfGameWin = "Oh snap, you made it through all the questions!<br>Final Score: " + score + "Click hereto play again!";
+  let endOfGameWin = "Oh snap, you made it through all the questions!<br>Final Score: " + score + " Click here to play again!";
   let endOfGameLoss = "Game Over Meatbag<br>Final Score: " + score + "<br>Click to play again!";
 
   hideQandA();
@@ -200,8 +201,10 @@ function displayMessage(corrAnswer) {
     }
   }
 
-  let container = document.getElementById("container");
-  container.appendChild(newP);
+  //let parent = document.getElementById("container");
+  let reference = document.getElementById("titleBox");
+  reference.parentNode.insertBefore(newP, reference.nextSibling);
+  //container.appendChild(newP);
 
   newP.addEventListener("click", function() {
     newP.remove();
@@ -259,7 +262,6 @@ function revealQandA() {
   }
 }
 
-
 function shuffle(array) {
   let newArray = array.slice();
   for (let i = newArray.length - 1; i > 0; i--) {
@@ -269,6 +271,9 @@ function shuffle(array) {
   return newArray;
 }
 
+function playSound(sound) {
+  //add stuff
+}
 
 loadQuestionAndAnswers();
 updateGameStates();
